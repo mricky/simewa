@@ -32,7 +32,7 @@
 			$this->col = [];
 			$this->col[] = ["label"=>"Asset","name"=>"asset_id","join"=>"assets,name"];
 			$this->col[] = ["label"=>"Satuan","name"=>"uom_id","join"=>"uom,name"];
-			$this->col[] = ["label"=>"Harga","name"=>"price"];
+			$this->col[] = ["label"=>"Harga","name"=>"price","callback_php"=>'number_format($row->price)'];
 			$this->col[] = ["label"=>"Keterangan","name"=>"description"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
