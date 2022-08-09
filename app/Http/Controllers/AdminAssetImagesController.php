@@ -5,12 +5,12 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminAssetsController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminAssetImagesController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "name";
+			$this->title_field = "id";
 			$this->limit = "20";
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
@@ -25,29 +25,25 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "assets";
+			$this->table = "asset_images";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Kategori","name"=>"category_id","join"=>"categories,name"];
-			$this->col[] = ["label"=>"Nama","name"=>"name"];
-			$this->col[] = ["label"=>"Keterangan","name"=>"descriptions"];
-			$this->col[] = ["label"=>"Dibuat Oleh","name"=>"created_by"];
-			$this->col[] = ["label"=>"Diubah Oleh","name"=>"updated_by"];
+			$this->col[] = ["label"=>"Asset","name"=>"asset_id","join"=>"assets,name"];
+			$this->col[] = ["label"=>"Url","name"=>"image_url","image"=>true];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Kategori','name'=>'category_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-5','datatable'=>'categories,name'];
-			$this->form[] = ['label'=>'Nama','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Keterangan','name'=>'descriptions','type'=>'multitext','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Asset','name'=>'asset_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'assets,name'];
+			$this->form[] = ['label'=>'Image Url','name'=>'image_url','type'=>'upload','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Nama','name'=>'name','type'=>'multitext','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Keterangan','name'=>'descriptions','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Asset','name'=>'asset_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'assets,name'];
+			//$this->form[] = ['label'=>'Image Url','name'=>'image_url','type'=>'upload','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# OLD END FORM
 
 			/* 
@@ -62,7 +58,7 @@
 			| @parent_columns = Sparate with comma, e.g : name,created_at
 	        | 
 	        */
-	        $this->sub_module[] = ['label'=>'Photo','path'=>'asset_images','parent_columns'=>'name','foreign_key'=>'asset_id','button_color'=>'success','button_icon'=>'fa fa-image'] ;
+	        $this->sub_module = array();
 
 
 	        /* 
@@ -257,7 +253,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-			
+
 	    }
 
 	    /* 
